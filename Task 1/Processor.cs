@@ -87,10 +87,7 @@ namespace Task_1
         {
             if (base64Url.Length != 22)
                 throw new FormatException("Base64Url string must be exactly 22 characters.");
-
-            // Base64Url to Base64 conversion:
-            // '-' => '+', '_' => '/'
-            Span<char> base64 = stackalloc char[24]; // 22 + 2 padding '='
+            Span<char> base64 = stackalloc char[24];
 
             for (int i = 0; i < 22; i++)
             {
@@ -102,12 +99,9 @@ namespace Task_1
                     _ => c
                 };
             }
-
-            // Add padding
             base64[22] = '=';
             base64[23] = '=';
 
-            // Decode base64 to bytes (16 bytes for GUID)
             Span<byte> bytes = stackalloc byte[16];
             if (!Convert.TryFromBase64Chars(base64, bytes, out int bytesWritten) || bytesWritten != 16)
                 throw new FormatException("Invalid base64 string.");

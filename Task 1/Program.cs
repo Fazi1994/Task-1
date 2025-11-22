@@ -10,6 +10,7 @@ class Program
         var config = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
 
         string connectionString = config.GetConnectionString("DefaultConnection");
+        Console.WriteLine("Task # 1: Four level categories tree.\n\n");
         Console.WriteLine("Show Categories tree by using Entity Framework");
         var sw1 = Stopwatch.StartNew();
         var efTree = Processor.BuildTreeEF();
@@ -24,9 +25,10 @@ class Program
         sw2.Stop();
         Console.WriteLine($"SP Time: {sw2.ElapsedMilliseconds} ms\n");
 
-
-        string base64UrlGuid = "bP0yS_RJTI6tIzY5q_3eEA";
-        Guid guid = Processor.Base64UrlToGuid(base64UrlGuid);
-        Console.WriteLine(guid);
+        Console.WriteLine("Task # 2: Write memory allocation free base64 url string to guid converter.\n\n");
+        string base64Url = "bP0yS_RJTI6tIzY5q_3eEA";
+        Guid guid = Processor.Base64UrlToGuid(base64Url);
+        Console.WriteLine($"Base64URL Input: {base64Url}");
+        Console.WriteLine($"Base64URL Output:{guid}");
     }
 }
